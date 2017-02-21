@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet-MyCert.Web-ed700f6f-3b79-42ec-98d1-55da8520226f",
 
   "dependencies": {
@@ -41,10 +41,12 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc":  {
+    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }
+    },
+    "MyCert.Data": "1.0.0-*",
+    "MyCert.Services": "1.0.0-*"
   },
 
   "tools": {

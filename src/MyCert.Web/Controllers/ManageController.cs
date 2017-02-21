@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MyCert.Data.Models;
 using MyCert.Web.Models;
 using MyCert.Web.Models.ManageViewModels;
 using MyCert.Web.Services;

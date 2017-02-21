@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using MyCert.Data.Models;
 using MyCert.Web.Models;
 using MyCert.Web.Models.AccountViewModels;
 using MyCert.Web.Services;

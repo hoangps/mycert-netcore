@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MyCert.Web.Data;
-using MyCert.Web.Models;
+using MyCert.Data;
+using MyCert.Data.Models;
 using MyCert.Web.Services;
 
 namespace MyCert.Web
