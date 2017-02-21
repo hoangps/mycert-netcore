@@ -1,0 +1,97 @@
+﻿@model UserViewModel
+
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="fa fa-user-plus fa-fw "></i>
+                Create User
+                <span>
+                    >
+                    Create
+                </span>
+            </h1>
+        </div>
+    </div>
+    @Html.Partial("_Alerts", TempData["Alert"])
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-6">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-2" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-user-plus"></i> </span>
+                        <h2>User</h2>
+                    </header>
+                    <div>
+                        <div class="jarviswidget-editbox"></div>
+                        <div class="widget-body">
+                            <form asp-action="Create" method="post" role="form" enctype="multipart/form-data">
+                                <fieldset>
+                                    <div asp-validation-summary="All" class="alert alert-danger"></div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="FirstName" class="control-label"></label>
+                                            <input asp-for="FirstName" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="LastName" class="control-label"></label>
+                                            <input asp-for="LastName" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="UserName" class="control-label"></label>
+                                            <input asp-for="UserName" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="Password" class="control-label"></label>
+                                            <input asp-for="Password" class="form-control" type="password" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="PasswordConfirmation" class="control-label"></label>
+                                            <input asp-for="PasswordConfirmation" class="form-control" type="password" />
+                                        </div>
+                                        <p class="help-block">
+                                            Passwords must be at least one lowercase character, one uppercase character, one number, and 8 characters minimum length.
+                                        </p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="Email" class="control-label"></label>
+                                            <input asp-for="Email" class="form-control" type="email" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="PhoneNumber" class="control-label"></label>
+                                            <input asp-for="PhoneNumber" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="AvailableRoles" class="control-label"></label>
+                                            @Html.EditorFor(m => m.AvailableRoles)
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="form-actions">
+                                    <a asp-action="Index" class="btn btn-default btn-lg"><i class="fa fa-times"></i> Cancel</a>
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="fa fa-save"></i>
+                                        Create User
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

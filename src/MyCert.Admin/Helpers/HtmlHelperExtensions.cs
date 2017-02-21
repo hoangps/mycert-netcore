@@ -67,6 +67,42 @@ namespace MyCert.Admin.Helpers
         }
 
         /// <summary>
+        ///     Compares the requested route with the given <paramref name="controller" /> value, if a match is found the
+        ///     <paramref name="attribute" /> value is returned.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="controller">The action value to compare to the requested route action.</param>
+        /// <param name="attribute">The attribute value to return in the current action matches the given action value.</param>
+        /// <returns>A HtmlString containing the given attribute value; otherwise an empty string.</returns>
+        public static IHtmlContent RouteIfController(this IHtmlHelper helper, string controller, string attribute)
+        {
+            var currentController = (helper.ViewContext.RouteData.Values["controller"] ?? string.Empty).ToString().UnDash();
+
+            var hasController = controller.Equals(currentController, StringComparison.OrdinalIgnoreCase);
+
+            return hasController ? new HtmlString(attribute) : new HtmlString(string.Empty);
+        }
+
+        /// <summary>
+        ///     Compares the requested route with the given <paramref name="action" /> value, if a match is found the
+        ///     <paramref name="attribute" /> value is returned.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="action">The action value to compare to the requested route action.</param>
+        /// <param name="attribute">The attribute value to return in the current action matches the given action value.</param>
+        /// <returns>A HtmlString containing the given attribute value; otherwise an empty string.</returns>
+        public static IHtmlContent RouteIfAction(this IHtmlHelper helper, string action, string controller, string attribute)
+        {
+            var currentController = (helper.ViewContext.RouteData.Values["controller"] ?? string.Empty).ToString().UnDash();
+            var currentAction = (helper.ViewContext.RouteData.Values["action"] ?? string.Empty).ToString().UnDash();
+
+            var hasController = controller.Equals(currentController, StringComparison.OrdinalIgnoreCase);
+            var hasAction = action.Equals(currentAction, StringComparison.OrdinalIgnoreCase);
+
+            return hasAction && hasController ? new HtmlString(attribute) : new HtmlString(string.Empty);
+        }
+
+        /// <summary>
         ///     Renders the specified partial view with the parent's view data and model if the given setting entry is found and
         ///     represents the equivalent of true.
         /// </summary>
@@ -137,7 +173,7 @@ namespace MyCert.Admin.Helpers
             button.Attributes.Add("aria-hidden", "true");
             button.InnerHtml.AppendHtml("&times;");
 
-            div.InnerHtml.AppendHtml(button);
+            div.InnerHtml.Append(button.ToString());
 
             if (!heading.IsEmpty())
             {
@@ -145,14 +181,44 @@ namespace MyCert.Admin.Helpers
                 h4.AddCssClass("alert-heading");
                 h4.InnerHtml.Append($"<h4 class=\"alert-heading\">{heading}</h4>");
 
-                div.InnerHtml.AppendHtml(h4);
+                div.InnerHtml.Append(h4.ToString());
             }
 
             var summary = htmlHelper.ValidationSummary();
 
-            div.InnerHtml.AppendHtml(summary);
+            div.InnerHtml.Append(summary.ToString());
 
             return div;
+        }
+
+
+        public static IHtmlContent DisplayCheckWithTooltip(string valueCheck, bool condition, string trueTooltip, string falseTooltip)
+        {
+            if (!string.IsNullOrEmpty(valueCheck))
+            {
+                if (condition)
+                {
+                    return new HtmlString("<span class=\"fa fa-check-circle icon-color-good\" rel=\"tooltip\" data-placement=\"right\" data-original-title=\"" + trueTooltip + "\" data-html=\"false\"></span>");
+                }
+                else
+                {
+                    return new HtmlString("<span class=\"fa fa-times-circle icon-color-bad\" rel=\"tooltip\" data-placement=\"right\" data-original-title=\"" + falseTooltip + "\" data-html=\"false\"></span>");
+                }
+            }
+
+            return new HtmlString(string.Empty);
+        }
+
+        public static IHtmlContent DisplayCheckWithTooltip(bool condition, string trueTooltip, string falseTooltip)
+        {
+            if (condition)
+            {
+                return new HtmlString("<span class=\"fa fa-check-circle icon-color-good\" rel=\"tooltip\" data-placement=\"right\" data-original-title=\"" + trueTooltip + "\" data-html=\"false\"></span>");
+            }
+            else
+            {
+                return new HtmlString("<span class=\"fa fa-times-circle icon-color-bad\" rel=\"tooltip\" data-placement=\"right\" data-original-title=\"" + falseTooltip + "\" data-html=\"false\"></span>");
+            }
         }
     }
 }

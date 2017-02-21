@@ -18,7 +18,7 @@
     "MyCert.Web": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5000",
+      "launchUrl": "https://mycert.com",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

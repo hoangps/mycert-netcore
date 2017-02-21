@@ -65,7 +65,7 @@ namespace MyCert.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, DatabaseInitializer dbInitializer)
+        public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, DatabaseInitializer dbInitializer)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -102,7 +102,7 @@ namespace MyCert.Web
             var userManager = app.ApplicationServices.GetService<UserManager<ApplicationUser>>();
             var roleManager = app.ApplicationServices.GetService<RoleManager<IdentityRole>>();
 
-            dbInitializer.Initialize(context, userManager, roleManager);
+            await dbInitializer.Initialize(context, userManager, roleManager);
         }
     }
 }

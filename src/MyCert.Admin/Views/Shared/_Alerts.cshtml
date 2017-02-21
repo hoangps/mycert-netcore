@@ -1,0 +1,20 @@
+﻿@model Dictionary<string, string>
+@if (Model != null)
+{
+    if (string.Equals(Model.FirstOrDefault().Key, "success"))
+    {
+        <div class="alert alert-success alert-block">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            <h4 class="alert-heading">Success!</h4>
+            @Model.FirstOrDefault().Value
+        </div>
+    }
+    else if (string.Equals(Model.FirstOrDefault().Key, "failed"))
+    {
+        <div class="alert alert-danger alert-block">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            <h4 class="alert-heading">Failed!</h4>
+            @Model.FirstOrDefault().Value
+        </div>
+    }
+}

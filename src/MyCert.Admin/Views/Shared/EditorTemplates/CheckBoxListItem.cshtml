@@ -1,0 +1,16 @@
+﻿@model OpenLive.Client.Admin.Models.Shared.CheckBoxListItem
+
+<br/>
+@Html.HiddenFor(x => x.Id)
+@if (Model.IsDisabled)
+{
+    @Html.CheckBoxFor(x => x.IsChecked, new {disabled = ""})
+}
+else
+{
+    @Html.CheckBoxFor(x => x.IsChecked)
+}
+&nbsp;
+@Html.LabelFor(x => x.IsChecked, Model.Display)
+<input asp-for="Display" type="hidden"/>
+<br />  
