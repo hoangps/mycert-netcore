@@ -46,7 +46,8 @@
       "type": "build"
     },
     "MyCert.Data": "1.0.0-*",
-    "MyCert.Services": "1.0.0-*"
+    "MyCert.Services": "1.0.0-*",
+    "Microsoft.AspNetCore.Session": "1.0.0"
   },
 
   "tools": {

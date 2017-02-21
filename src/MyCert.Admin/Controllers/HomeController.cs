@@ -1,33 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿#region Using
+ 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+#endregion
 
 namespace MyCert.Admin.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        // GET: home/index
+        public ActionResult Index()
         {
             return View();
         }
 
-        public IActionResult About()
+        // GET: home/social
+        public ActionResult Social()
         {
-            ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 
-        public IActionResult Contact()
+        // GET: home/inbox
+        public ActionResult Inbox()
         {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 
-        public IActionResult Error()
+        // GET: home/widgets
+        public ActionResult Widgets()
+        {
+            return View();
+        }
+
+        // GET: home/chat
+        public ActionResult Chat()
         {
             return View();
         }

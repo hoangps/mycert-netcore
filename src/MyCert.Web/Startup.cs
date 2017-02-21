@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -53,14 +54,18 @@ namespace MyCert.Web
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+            services.AddSession();
+            services.AddMemoryCache();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.AddScoped<DatabaseInitializer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, DatabaseInitializer dbInitializer)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -92,6 +97,12 @@ namespace MyCert.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            var context = app.ApplicationServices.GetService<ApplicationDbContext>();
+            var userManager = app.ApplicationServices.GetService<UserManager<ApplicationUser>>();
+            var roleManager = app.ApplicationServices.GetService<RoleManager<IdentityRole>>();
+
+            dbInitializer.Initialize(context, userManager, roleManager);
         }
     }
 }
